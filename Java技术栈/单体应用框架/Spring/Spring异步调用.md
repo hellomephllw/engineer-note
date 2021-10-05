@@ -311,3 +311,20 @@ public class AsyncCallBackTask {
 
 }
 ```
+
+##### 2.5 优雅关闭线程池
+
+```java
+@Bean("taskExecutor")
+public Executor taskExecutor() {
+    ThreadPoolTaskScheduler executor = new ThreadPoolTaskScheduler();
+    executor.setPoolSize(20);
+    executor.setThreadNamePrefix("taskExecutor-");
+    executor.setWaitForTasksToCompleteOnShutdown(true);
+    executor.setAwaitTerminationSeconds(60);
+    return executor;
+}
+```
+
+- setWaitForTasksToCompleteOnShutdown(true)：该方法用来设置线程池关闭的时候等待所有任务都完成后，再继续销毁其他的Bean，这样这些异步任务的销毁就会先于数据库连接池对象的销毁。
+- setAwaitTerminationSeconds(60)：该方法用来设置线程池中任务的等待时间，如果超过这个时间还没有销毁就强制销毁，以确保应用最后能够被关闭，而不是阻塞住。
