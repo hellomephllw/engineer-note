@@ -2,11 +2,11 @@
 
 ##### 1.1 编写异步调用
 
-###### 1) 在SpringBoot入口类上配置@EnableAsync注解开启异步处理。
+###### 1) 在SpringBoot入口类上配置@EnableAsync注解开启异步处理
 
 ```java
-@SpringBootApplication
 @EnableAsync
+@SpringBootApplication
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -14,7 +14,7 @@ public class Application {
 }
 ```
 
-###### 2) 创建AsyncTask类，分别在方法上配置@Async注解。
+###### 2) 创建AsyncTask类，分别在方法上配置@Async注解
 
 ```java
 @Component
@@ -36,7 +36,7 @@ public class AsyncTask {
 }
 ```
 
-###### 3) 在单元测试中顺序调用doTaskOne、doTaskTwo、doTaskThree。
+###### 3) 在单元测试中顺序调用doTaskOne、doTaskTwo、doTaskThree
 
 ```java
 @RunWith(SpringRunner.class)
