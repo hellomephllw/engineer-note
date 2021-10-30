@@ -6,9 +6,9 @@
 @EnableScheduling
 @SpringBootApplication
 public class Application {
-		public static void main(String[] args) {
-				SpringApplication.run(Application.class, args);
-		}
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
 }
 ```
 
@@ -18,23 +18,23 @@ public class Application {
 @Component
 public class ScheduleTask {
 
-		// 每次任务间隔2秒
-		@Scheduled(fixedRate = 2000)
-		public void fixedRateScheduleTask() {
-				System.out.println("fixedRateScheduleTask");
-    }
+	// 每次任务间隔2秒
+	@Scheduled(fixedRate = 2000)
+	public void fixedRateScheduleTask() {
+		System.out.println("fixedRateScheduleTask");
+	}
 
-		// 每隔2秒执行一次
-		@Scheduled(fixedDelay = 2000)
-		public void fixedDelayScheduleTask() {
-				System.out.println("fixedDelayScheduleTask");
-		}
+	// 每隔2秒执行一次
+	@Scheduled(fixedDelay = 2000)
+	public void fixedDelayScheduleTask() {
+		System.out.println("fixedDelayScheduleTask");
+	}
 
-		// 每隔2秒执行一次
-		@Scheduled(cron = "0/2 * * * * ?")
-		public void cronScheduleTask() {
-				System.out.println("cronScheduleTask");
-		}
+	// 每隔2秒执行一次
+	@Scheduled(cron = "0/2 * * * * ?")
+	public void cronScheduleTask() {
+		System.out.println("cronScheduleTask");
+	}
 
 }
 ```
@@ -91,25 +91,25 @@ Spring的定时任务是以单线程的方式运作，关于每一种的配置�
 @Configuration 
 public class SchedulerConfig implements SchedulingConfigurer {
 
-		// 可以使用@Value在properties配置文件中配置
-		@Override
-		public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
-				ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
-				// 线程池大小为10
-				threadPoolTaskScheduler.setPoolSize(10);
-				// 设置线程名称前缀
-				threadPoolTaskScheduler.setThreadNamePrefix("scheduled-thread-");
-				// 设置线程池关闭的时候等待所有任务都完成再继续销毁其他的Bean 
-				threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
-				// 设置线程池中任务的等待时间，如果超过这个时候还没有销毁就强制销毁，以确保应用最后能够被关闭，而不是阻塞住 
-				threadPoolTaskScheduler.setAwaitTerminationSeconds(60);
-				// 这里采用了CallerRunsPolicy策略，当线程池没有处理能力的时候，该策略会直接在 execute 方法的调用线程中运行被拒绝的任务；如果执行程序已关闭，则会丢弃该任务 
-				threadPoolTaskScheduler.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-				// 初始化
-				threadPoolTaskScheduler.initialize();
+	// 可以使用@Value在properties配置文件中配置
+	@Override
+	public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
+		ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+		// 线程池大小为10
+		threadPoolTaskScheduler.setPoolSize(10);
+		// 设置线程名称前缀
+		threadPoolTaskScheduler.setThreadNamePrefix("scheduled-thread-");
+		// 设置线程池关闭的时候等待所有任务都完成再继续销毁其他的Bean 
+		threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
+		// 设置线程池中任务的等待时间，如果超过这个时候还没有销毁就强制销毁，以确保应用最后能够被关闭，而不是阻塞住 
+		threadPoolTaskScheduler.setAwaitTerminationSeconds(60);
+		// 这里采用了CallerRunsPolicy策略，当线程池没有处理能力的时候，该策略会直接在 execute 方法的调用线程中运行被拒绝的任务；如果执行程序已关闭，则会丢弃该任务 
+		threadPoolTaskScheduler.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+		// 初始化
+		threadPoolTaskScheduler.initialize();
 
-				scheduledTaskRegistrar.setTaskScheduler(threadPoolTaskScheduler); 
-		}
+		scheduledTaskRegistrar.setTaskScheduler(threadPoolTaskScheduler); 
+	}
 
 }
 ```
@@ -120,25 +120,25 @@ public class SchedulerConfig implements SchedulingConfigurer {
 @Configuration
 public class TaskSchedulingAutoConfiguration {
 
-		// 可以使用@Value在properties配置文件中配置
-		@Bean("taskScheduler")
-		public ThreadPoolTaskScheduler schedulingTask() {
-				ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
-				// 线程池大小为10
-				threadPoolTaskScheduler.setPoolSize(10);
-				// 设置线程名称前缀
-				threadPoolTaskScheduler.setThreadNamePrefix("scheduled-thread-");
-				// 设置线程池关闭的时候等待所有任务都完成再继续销毁其他的Bean 
-				threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
-				// 设置线程池中任务的等待时间，如果超过这个时候还没有销毁就强制销毁，以确保应用最后能够被关闭，而不是阻塞住 
-				threadPoolTaskScheduler.setAwaitTerminationSeconds(60);
-				// 这里采用了CallerRunsPolicy策略，当线程池没有处理能力的时候，该策略会直接在 execute 方法的调用线程中运行被拒绝的任务；如果执行程序已关闭，则会丢弃该任务 
-				threadPoolTaskScheduler.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
-				// 初始化
-				threadPoolTaskScheduler.initialize();
+	// 可以使用@Value在properties配置文件中配置
+	@Bean("taskScheduler")
+	public ThreadPoolTaskScheduler schedulingTask() {
+		ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+		// 线程池大小为10
+		threadPoolTaskScheduler.setPoolSize(10);
+		// 设置线程名称前缀
+		threadPoolTaskScheduler.setThreadNamePrefix("scheduled-thread-");
+		// 设置线程池关闭的时候等待所有任务都完成再继续销毁其他的Bean 
+		threadPoolTaskScheduler.setWaitForTasksToCompleteOnShutdown(true);
+		// 设置线程池中任务的等待时间，如果超过这个时候还没有销毁就强制销毁，以确保应用最后能够被关闭，而不是阻塞住 
+		threadPoolTaskScheduler.setAwaitTerminationSeconds(60);
+		// 这里采用了CallerRunsPolicy策略，当线程池没有处理能力的时候，该策略会直接在 execute 方法的调用线程中运行被拒绝的任务；如果执行程序已关闭，则会丢弃该任务 
+		threadPoolTaskScheduler.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+		// 初始化
+		threadPoolTaskScheduler.initialize();
 
-				return threadPoolTaskScheduler;
-    }
+		return threadPoolTaskScheduler;
+	}
 }
 ```
 
@@ -156,26 +156,26 @@ public class TaskSchedulingAutoConfiguration {
 @Component
 public class ScheduleTask {
 
-		// 每次任务间隔2秒
-		@Scheduled(fixedRate = 2000)
-		@Async
-		public void fixedRateScheduleTask() {
-				System.out.println("fixedRateScheduleTask");
-		}
+	// 每次任务间隔2秒
+	@Scheduled(fixedRate = 2000)
+	@Async
+	public void fixedRateScheduleTask() {
+		System.out.println("fixedRateScheduleTask");
+	}
   	
-		// 每隔2秒执行一次
-		@Scheduled(fixedDelay = 2000)
-		@Async
-		public void fixedDelayScheduleTask() {
-				System.out.println("fixedDelayScheduleTask");
-  	}
+	// 每隔2秒执行一次
+	@Scheduled(fixedDelay = 2000)
+	@Async
+	public void fixedDelayScheduleTask() {
+		System.out.println("fixedDelayScheduleTask");
+ 	}
   	
-		// 每隔2秒执行一次
-		@Scheduled(cron = "0/2 * * * * ?")
-		@Async
-		public void cronScheduleTask() {
-				System.out.println("cronScheduleTask");
-		}
+	// 每隔2秒执行一次
+	@Scheduled(cron = "0/2 * * * * ?")
+	@Async
+	public void cronScheduleTask() {
+		System.out.println("cronScheduleTask");
+	}
 
 }
 ```

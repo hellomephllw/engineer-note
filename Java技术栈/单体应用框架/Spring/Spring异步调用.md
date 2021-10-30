@@ -8,9 +8,9 @@
 @EnableAsync
 @SpringBootApplication
 public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
 }
 ```
 
@@ -19,20 +19,20 @@ public class Application {
 ```java
 @Component
 public class AsyncTask {
-    @Async
-    public void doTaskOne() throws Exception {
-        System.out.print("task one");
-    }
+	@Async
+	public void doTaskOne() throws Exception {
+		System.out.print("task one");
+	}
 
-    @Async
-    public void doTaskTwo() throws Exception {
-        System.out.print("task two");
-    }
+	@Async
+	public void doTaskTwo() throws Exception {
+		System.out.print("task two");
+	}
 
-    @Async
-    public void doTaskThree() throws Exception {
-        System.out.print("task three");
-    }
+	@Async
+	public void doTaskThree() throws Exception {
+		System.out.print("task three");
+	}
 }
 ```
 
@@ -42,16 +42,16 @@ public class AsyncTask {
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AsyncTaskTest {
-    @Autowired
-    private AsyncTask task;
+	@Autowired
+	private AsyncTask task;
 
-    @Test
-    public void testAsyncTasks() throws Exception {
-        task.doTaskOne();
-        task.doTaskTwo();
-        task.doTaskThree();
-      	System.out.print("in the end");
-    }
+	@Test
+	public void testAsyncTasks() throws Exception {
+		task.doTaskOne();
+		task.doTaskTwo();
+		task.doTaskThree();
+		System.out.print("in the end");
+	}
 }
 ```
 
@@ -77,9 +77,9 @@ task one
 @SpringBootApplication
 @EnableAsync
 public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
 }
 ```
 
@@ -88,23 +88,23 @@ public class Application {
 ```java
 @Component
 public class AsyncCallBackTask {
-    @Async
-    public Future<String> doTaskOneCallback() throws Exception {
-        System.out.print("task one");
-        return new AsyncResult<>("finish one");
-    }
+	@Async
+	public Future<String> doTaskOneCallback() throws Exception {
+		System.out.print("task one");
+		return new AsyncResult<>("finish one");
+	}
 
-    @Async
-    public Future<String> doTaskTwoCallback() throws Exception {
-        System.out.print("task two");
-        return new AsyncResult<>("finish two");
-    }
+	@Async
+	public Future<String> doTaskTwoCallback() throws Exception {
+		System.out.print("task two");
+		return new AsyncResult<>("finish two");
+	}
 
-    @Async
-    public Future<String> doTaskThreeCallback() throws Exception {
-        System.out.print("task three");
-        return new AsyncResult<>("finish three");
-    }
+	@Async
+	public Future<String> doTaskThreeCallback() throws Exception {
+		System.out.print("task three");
+		return new AsyncResult<>("finish three");
+	}
 }
 ```
 
@@ -114,22 +114,22 @@ public class AsyncCallBackTask {
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AsyncCallBackTaskTest {
-    @Autowired
-    private AsyncCallBackTask task;
+	@Autowired
+	private AsyncCallBackTask task;
 
-    @Test
-    public void testAsyncCallbackTask() throws Exception {
-        Future<String> task1 = task.doTaskOneCallback();
-        Future<String> task2 = task.doTaskTwoCallback();
-        Future<String> task3 = task.doTaskThreeCallback();
+	@Test
+	public void testAsyncCallbackTask() throws Exception {
+		Future<String> task1 = task.doTaskOneCallback();
+		Future<String> task2 = task.doTaskTwoCallback();
+		Future<String> task3 = task.doTaskThreeCallback();
 
-        // 三个任务都调用完成，退出循环等待
-        while (!task1.isDone() || !task2.isDone() || !task3.isDone()) {
-            sleep(1000);
-        }
+		// 三个任务都调用完成，退出循环等待
+		while (!task1.isDone() || !task2.isDone() || !task3.isDone()) {
+			sleep(1000);
+		}
 
-      	System.out.print("in the end");
-    }
+		System.out.print("in the end");
+	}
 }
 ```
 
@@ -222,23 +222,23 @@ spring.task.execution.thread-name-prefix=task-
 @Component
 public class AsyncCallBackTask {
   
-    @Async
-    public Future<String> doTaskOneCallback() throws Exception {
-        System.out.print("task one");
-        return new AsyncResult<>("finish one");
-    }
+	@Async
+	public Future<String> doTaskOneCallback() throws Exception {
+		System.out.print("task one");
+		return new AsyncResult<>("finish one");
+	}
 
-    @Async
-    public Future<String> doTaskTwoCallback() throws Exception {
-        System.out.print("task two");
-        return new AsyncResult<>("finish two");
-    }
+	@Async
+	public Future<String> doTaskTwoCallback() throws Exception {
+		System.out.print("task two");
+		return new AsyncResult<>("finish two");
+	}
     
-    @Async
-    public Future<String> doTaskThreeCallback() throws Exception {
-        System.out.print("task three");
-        return new AsyncResult<>("finish three");
-    }
+	@Async
+	public Future<String> doTaskThreeCallback() throws Exception {
+		System.out.print("task three");
+		return new AsyncResult<>("finish three");
+	}
 
 }
 ```
@@ -257,30 +257,30 @@ public class AsyncCallBackTask {
 @Configuration
 public class TaskConfiguration {
   
-    @Bean("taskExecutor")
-    public Executor taskExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(10);
-        executor.setMaxPoolSize(20);
-        executor.setQueueCapacity(200);
-        executor.setKeepAliveSeconds(60);
-        executor.setThreadNamePrefix("taskExecutor-");
-        executor.setRejectedExecutionHandler(new CallerRunsPolicy());
-        return executor;
-    }
+	@Bean("taskExecutor")
+	public Executor taskExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(10);
+		executor.setMaxPoolSize(20);
+		executor.setQueueCapacity(200);
+		executor.setKeepAliveSeconds(60);
+		executor.setThreadNamePrefix("taskExecutor-");
+		executor.setRejectedExecutionHandler(new CallerRunsPolicy());
+		return executor;
+	}
   
-		@Bean("selfTaskExecutor")
-    public Executor taskExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(10);
-        executor.setMaxPoolSize(20);
-        executor.setQueueCapacity(200);
-        executor.setKeepAliveSeconds(60);
-        executor.setThreadNamePrefix("selfTaskExecutor-");
-        executor.setRejectedExecutionHandler(new CallerRunsPolicy());
-        return executor;
-    }
-  
+	@Bean("selfTaskExecutor")
+	public Executor taskExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(10);
+		executor.setMaxPoolSize(20);
+		executor.setQueueCapacity(200);
+		executor.setKeepAliveSeconds(60);
+		executor.setThreadNamePrefix("selfTaskExecutor-");
+		executor.setRejectedExecutionHandler(new CallerRunsPolicy());
+		return executor;
+	}
+
 }
 ```
 
@@ -288,26 +288,26 @@ public class TaskConfiguration {
 @Component
 public class AsyncCallBackTask {
 
-		// 使用taskExecutor
-    @Async
-    public Future<String> doTaskOneCallback() throws Exception {
-        System.out.print("task one");
-        return new AsyncResult<>("finish one");
-    }
+	// 使用taskExecutor
+	@Async
+	public Future<String> doTaskOneCallback() throws Exception {
+		System.out.print("task one");
+		return new AsyncResult<>("finish one");
+	}
     
-		// 使用taskExecutor
-    @Async("taskExecutor")
-    public Future<String> doTaskTwoCallback() throws Exception {
-        System.out.print("task two");
-        return new AsyncResult<>("finish two");
-    }
+	// 使用taskExecutor
+	@Async("taskExecutor")
+	public Future<String> doTaskTwoCallback() throws Exception {
+		System.out.print("task two");
+		return new AsyncResult<>("finish two");
+	}
     
-		// 使用selfTaskExecutor
-    @Async("selfTaskExecutor")
-    public Future<String> doTaskThreeCallback() throws Exception {
-        System.out.print("task three");
-        return new AsyncResult<>("finish three");
-    }
+	// 使用selfTaskExecutor
+	@Async("selfTaskExecutor")
+	public Future<String> doTaskThreeCallback() throws Exception {
+		System.out.print("task three");
+		return new AsyncResult<>("finish three");
+	}
 
 }
 ```
@@ -317,12 +317,12 @@ public class AsyncCallBackTask {
 ```java
 @Bean("taskExecutor")
 public Executor taskExecutor() {
-    ThreadPoolTaskScheduler executor = new ThreadPoolTaskScheduler();
-    executor.setPoolSize(20);
-    executor.setThreadNamePrefix("taskExecutor-");
-    executor.setWaitForTasksToCompleteOnShutdown(true);
-    executor.setAwaitTerminationSeconds(60);
-    return executor;
+	ThreadPoolTaskScheduler executor = new ThreadPoolTaskScheduler();
+	executor.setPoolSize(20);
+	executor.setThreadNamePrefix("taskExecutor-");
+	executor.setWaitForTasksToCompleteOnShutdown(true);
+	executor.setAwaitTerminationSeconds(60);
+	return executor;
 }
 ```
 
