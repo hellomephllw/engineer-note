@@ -269,7 +269,7 @@ public class TaskConfiguration {
         return executor;
     }
   
-  	@Bean("selfTaskExecutor")
+		@Bean("selfTaskExecutor")
     public Executor taskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(10);
@@ -288,21 +288,21 @@ public class TaskConfiguration {
 @Component
 public class AsyncCallBackTask {
 
-  	// 使用taskExecutor
+		// 使用taskExecutor
     @Async
     public Future<String> doTaskOneCallback() throws Exception {
         System.out.print("task one");
         return new AsyncResult<>("finish one");
     }
     
-  	// 使用taskExecutor
+		// 使用taskExecutor
     @Async("taskExecutor")
     public Future<String> doTaskTwoCallback() throws Exception {
         System.out.print("task two");
         return new AsyncResult<>("finish two");
     }
     
-  	// 使用selfTaskExecutor
+		// 使用selfTaskExecutor
     @Async("selfTaskExecutor")
     public Future<String> doTaskThreeCallback() throws Exception {
         System.out.print("task three");
