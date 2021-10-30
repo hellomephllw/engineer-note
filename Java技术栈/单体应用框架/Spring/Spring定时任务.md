@@ -64,7 +64,7 @@ public class ScheduleTask {
 
 Spring的定时任务是以单线程的方式运作，关于每一种的配置影响如下。
 
-<img src="./assets/7027703-b2c08f00cc8300e4.jpg" alt="7027703-b2c08f00cc8300e4" style="zoom:80%;display:block" align='left' />
+<img src="./assets/7027703-b2c08f00cc8300e4.jpg" alt="7027703-b2c08f00cc8300e4" style="zoom:80%;" align='left' />
 
 - 如果使用cron来做定时间隔执行，如果上一次任务耽误了下一次的开始执行时间，那么下一次任务会在下下次执行。
 - fixedDelay的特点是每个任务的间隔一定是所设置的时间间隔。
