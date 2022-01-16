@@ -87,7 +87,6 @@ public interface functional {
 
 	// 可以写默认方法
 	default void doSomeThing() {
-
 	}
 
 	// 可以写静态方法
@@ -338,7 +337,7 @@ System.out.println(func4.apply("101010101010", 2));
 
 ### 5.2 实例方法
 
-#### 1)
+#### eg1:
 
 ```java
 // from
@@ -354,7 +353,7 @@ System.out.println(supplier1.get());
 4
 ```
 
-#### 2)
+#### eg2:
 
 ```java
 Util util = new Util();
@@ -371,7 +370,7 @@ print sth
 print sth too
 ```
 
-#### 3)
+#### eg3:
 
 ```java
 // from
@@ -397,6 +396,7 @@ public static void main() {
     Reference ref = new Reference();
     ref.doSth();
 }
+
 private void doSth() {
     Function<String, String> strSay = this::saySth;
     System.out.println(strSay.apply("hi"));
@@ -413,7 +413,7 @@ hello
 
 ### 5.4 构造函数
 
-#### 1)
+#### eg1:
 
 ```java
 // from
@@ -429,20 +429,75 @@ test str
 test str too
 ```
 
-#### 2)
+#### eg2:
 
-```
+```java
 Supplier<String> func3 = String::new;
-System.out.println("empty test string:" + func3.get());
+System.out.println("empty test string: " + func3.get());
 ```
 
 ```
-empty test string:
+empty test string: 
 ```
 
 ## 6 作用域
 
+```java
+public class Scope {
 
+    public static void main(String[] args) {
+        Scope scope = new Scope();
+        scope.scopeThis();
+        scope.scopeTest();
+    }
+
+    private void scopeThis() {
+        // this是定义lambda时的外部方法所属对象
+        Function<String, String> func = x -> {
+            System.out.println(this);
+            return x;
+        };
+        new Tmp().execute(func);
+    }
+
+    private void scopeTest() {
+        // 不定义成final也行, 只要在lambda中不修改值
+        // final int x = 0;
+        int x = 0;
+        Function<Integer, Integer> func = y -> y + x;
+        System.out.println(func.apply(1));
+    }
+
+}
+
+class Tmp {
+
+    public void execute(Function<String, String> func) {
+        func.apply("");
+    }
+
+}
+```
+
+```
+com.example.testlambda.syntax.Scope@548c4f57
+1
+```
 
 ## 7 递归
 
+```java
+public class Recursive {
+
+    public final static Function<Integer, Integer> func = x -> x == 1 ? x : Recursive.func.apply(--x);
+
+    public static void main(String[] args) {
+        System.out.println(func.apply(10));
+    }
+
+}
+```
+
+```
+1
+```
