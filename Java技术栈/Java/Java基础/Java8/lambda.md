@@ -51,7 +51,7 @@ Calculator calculator = () -> {
 
 ```java
 (int x, int y) -> {
-	return x + y; 
+    return x + y; 
 };
 ```
 
@@ -65,7 +65,7 @@ Calculator calculator = () -> {
 
 ```java
 (x, y) -> {
-	System.out.println(x + y);
+    System.out.println(x + y);
 };
 ```
 
@@ -82,21 +82,21 @@ Calculator calculator = () -> {
 @FunctionalInterface
 public interface functional {
 
-	// 只能有一个抽象方法
-	int execute(Integer x, Integer y);
+    // 只能有一个抽象方法
+    int execute(Integer x, Integer y);
 
-	// 可以写默认方法
-	default void doSomeThing() {
-	}
+    // 可以写默认方法
+    default void doSomeThing() {
+    }
 
-	// 可以写静态方法
-	static int doAnotherThing() {
-		return 1;
-	}
+    // 可以写静态方法
+    static int doAnotherThing() {
+        return 1;
+    }
 
-	// 可以包含Object的public方法
-	// 不会被当作抽象方法，因为
-	boolean equals(Object obj);
+    // 可以包含Object的public方法
+    // 不会被当作抽象方法，因为
+    boolean equals(Object obj);
 
 }
 ```
@@ -374,13 +374,14 @@ print sth too
 
 ```java
 // from
-Function<String, Integer> strLengthFunc = String::length;
+Function<String, Integer> strLengthFunc1 = str -> str.length();
 String name = "this length";
-int len = strLengthFunc.apply(name);
+int len = strLengthFunc1.apply(name);
 System.out.println("name  = " + name + ", length = " + len);
 // to
+Function<String, Integer> strLengthFunc2 = String::length;
 name = "the other length";
-len = strLengthFunc.apply(name);
+len = strLengthFunc2.apply(name);
 System.out.println("name  = " + name + ", length = " + len);
 ```
 
