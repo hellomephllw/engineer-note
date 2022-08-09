@@ -8,9 +8,11 @@
 @EnableAsync
 @SpringBootApplication
 public class Application {
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
+	
 }
 ```
 
@@ -19,6 +21,7 @@ public class Application {
 ```java
 @Component
 public class AsyncTask {
+
 	@Async
 	public void doTaskOne() throws Exception {
 		System.out.print("task one");
@@ -33,6 +36,7 @@ public class AsyncTask {
 	public void doTaskThree() throws Exception {
 		System.out.print("task three");
 	}
+
 }
 ```
 
@@ -42,6 +46,7 @@ public class AsyncTask {
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AsyncTaskTest {
+
 	@Autowired
 	private AsyncTask task;
 
@@ -52,6 +57,7 @@ public class AsyncTaskTest {
 		task.doTaskThree();
 		System.out.print("in the end");
 	}
+
 }
 ```
 
@@ -77,9 +83,11 @@ task one
 @SpringBootApplication
 @EnableAsync
 public class Application {
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
+
 }
 ```
 
@@ -88,6 +96,7 @@ public class Application {
 ```java
 @Component
 public class AsyncCallBackTask {
+
 	@Async
 	public Future<String> doTaskOneCallback() throws Exception {
 		System.out.print("task one");
@@ -105,6 +114,7 @@ public class AsyncCallBackTask {
 		System.out.print("task three");
 		return new AsyncResult<>("finish three");
 	}
+
 }
 ```
 
@@ -114,6 +124,7 @@ public class AsyncCallBackTask {
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AsyncCallBackTaskTest {
+
 	@Autowired
 	private AsyncCallBackTask task;
 
@@ -130,6 +141,7 @@ public class AsyncCallBackTaskTest {
 
 		System.out.print("in the end");
 	}
+
 }
 ```
 

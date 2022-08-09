@@ -1,6 +1,6 @@
 ### 1 使用定时任务
 
-###### 1) 在SpringBoot入口类上配置@EnableAsync注解开启异步处理
+###### 1) SpringBoot入口类配置EnableScheduling注解启用定时任务
 
 ```java
 @EnableScheduling
@@ -150,8 +150,20 @@ public class TaskSchedulingAutoConfiguration {
 
 ### 5 使用异步调用
 
-理论上单线程的定时任务配上自定义的不同线程池可以满足任何情况。
+理论上单线程的定时任务配上自定义的不同线程池可以满足任何情况，不过SpringBoot也支持开启线程异步执行。
 
+###### 1) 启动类配置@EnableAsync注解
+```java
+@EnableScheduling
+@EnableAsync
+@SpringBootApplication
+public class Application {
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+```
+
+###### 2) 目标方法配置@Async注解
 ```java
 @Component
 public class ScheduleTask {
@@ -180,3 +192,47 @@ public class ScheduleTask {
 }
 ```
 
+<table>
+	<thead>
+		<tr><th>字段</th><th>允许值</th><th>允许特殊字符</th></tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>秒</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>分</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>小时</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>日期</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>月份</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>星期</td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>年</td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+日期和星期互斥

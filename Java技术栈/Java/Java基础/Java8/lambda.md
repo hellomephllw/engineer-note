@@ -1,3 +1,5 @@
+[toc]
+
 ## 1 基础语法
 
 ### 1.1 参数
@@ -80,7 +82,7 @@ Calculator calculator = () -> {
 ```java
 // 不写此注解也可以
 @FunctionalInterface
-public interface functional {
+public interface Functional {
 
     // 只能有一个抽象方法
     int execute(Integer x, Integer y);
@@ -208,6 +210,7 @@ System.out.println(supplier.get());
 #### 4.3.1 代码
 
 ```java
+// Function<T, R> T是输入 R是输出
 Function<Integer, Integer> func1 = x -> x + 1;
 System.out.println(func1.apply(10));
 
