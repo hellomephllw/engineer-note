@@ -56,7 +56,55 @@ System.out.println(newNano);
 2023-04-01T10:59:59.008
 ```
 
-### 1.3 获取
+### 1.3 加减
+
+#### 1.3.1 加
+
+```java
+LocalDateTime dateTime = LocalDateTime.of(2023, 4, 1, 10, 59, 59, 800 * 1000 * 1000);
+System.out.println(dateTime.plusYears(1));
+System.out.println(dateTime.plusMonths(1));
+System.out.println(dateTime.plusDays(1));
+System.out.println(dateTime.plusHours(1));
+System.out.println(dateTime.plusMinutes(1));
+System.out.println(dateTime.plusSeconds(1));
+System.out.println(dateTime.plusNanos(1));
+```
+
+```
+2024-04-01T10:59:59.800
+2023-05-01T10:59:59.800
+2023-04-02T10:59:59.800
+2023-04-01T11:59:59.800
+2023-04-01T11:00:59.800
+2023-04-01T11:00:00.800
+2023-04-01T10:59:59.800000001
+```
+
+#### 1.3.2 减
+
+```java
+LocalDateTime dateTime = LocalDateTime.of(2023, 4, 1, 10, 59, 59, 800 * 1000 * 1000);
+System.out.println(dateTime.minusYears(1));
+System.out.println(dateTime.minusMonths(1));
+System.out.println(dateTime.minusDays(1));
+System.out.println(dateTime.minusHours(1));
+System.out.println(dateTime.minusMinutes(1));
+System.out.println(dateTime.minusSeconds(1));
+System.out.println(dateTime.minusNanos(1));
+```
+
+```
+2022-04-01T10:59:59.800
+2023-03-01T10:59:59.800
+2023-03-31T10:59:59.800
+2023-04-01T09:59:59.800
+2023-04-01T10:58:59.800
+2023-04-01T10:59:58.800
+2023-04-01T10:59:59.799999999
+```
+
+### 1.4 获取
 
 ```java
 LocalDateTime dateTime = LocalDateTime.of(2023, 4, 1, 10, 59, 59, 800 * 1000 * 1000);
@@ -79,7 +127,7 @@ System.out.println(dateTime.getNano());
 800000000
 ```
 
-### 1.4 比较
+### 1.5 比较
 
 ```java
 LocalDateTime dateTime = LocalDateTime.of(2023, 4, 1, 10, 59, 59, 800 * 1000 * 1000);
@@ -95,7 +143,7 @@ true
 false
 ```
 
-### 1.5 转换
+### 1.6 转换
 
 ```java
 LocalDateTime dateTime = LocalDateTime.of(2023, 4, 1, 10, 59, 59, 800 * 1000 * 1000);
@@ -112,7 +160,7 @@ System.out.println(time);
 10:59:59.800
 ```
 
-### 1.6 闰年
+### 1.7 闰年
 
 ```java
 LocalDateTime dateTime = LocalDateTime.of(2023, 4, 1, 10, 59, 59, 800 * 1000 * 1000);
