@@ -276,6 +276,6 @@ System.out.println(pstOffsetDateTime);
 2023-05-06T03:41:47.537-07:00
 ```
 
-### 5.2 其他
+### 5.2 其他·
 
 > _略，与ZoneDateTime相同_
