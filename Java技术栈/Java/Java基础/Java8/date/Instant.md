@@ -69,3 +69,16 @@ System.out.println(instant.minusNanos(1));
 2023-04-29T01:27:52.220Z
 2023-04-29T01:27:52.220999999Z
 ```
+
+### 3 Date转换
+
+```java
+Date now = new Date();
+System.out.println(now.toInstant());
+System.out.println(Date.from(now.toInstant()));
+```
+
+```
+2023-05-06T10:32:20.613Z
+Sat May 06 18:32:20 CST 2023
+```
