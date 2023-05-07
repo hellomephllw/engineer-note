@@ -145,6 +145,7 @@ false
 
 ### 1.6 转换
 
+#### 1.6.1 Local转换
 ```java
 LocalDateTime dateTime = LocalDateTime.of(2023, 4, 1, 10, 59, 59, 800 * 1000 * 1000);
 System.out.println(dateTime);
@@ -158,6 +159,17 @@ System.out.println(time);
 2023-04-01T10:59:59.800
 2023-04-01
 10:59:59.800
+```
+
+#### 1.6.2 Instant转换
+
+```java
+LocalDateTime dateTime = LocalDateTime.ofInstant(Instant.now(), ZoneId.of("UTC+8"));
+System.out.println(dateTime);
+```
+
+```
+2023-05-07T18:46:37.049
 ```
 
 ### 1.7 闰年
