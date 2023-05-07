@@ -258,8 +258,6 @@ System.out.println(zonedDateTime);
 2024-05-05T18:36:28.703+08:00[Asia/Shanghai]
 ```
 
-### 
-
 ## 5 OffsetDateTime
 
 ### 5.1 now
