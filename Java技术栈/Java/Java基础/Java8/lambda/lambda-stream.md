@@ -637,6 +637,22 @@ System.out.println(map);
 {false=[Student(id=1, name=张三)], true=[Student(id=2, name=李四), Student(id=3, name=王五)]}
 ```
 
+### 4.5 join
+
+```java
+System.out.println(Stream.of("a", "b", "c").collect(Collectors.joining()));
+System.out.println(Stream.of(1, 3, 5).map(String::valueOf).collect(Collectors.joining()));
+System.out.println(Stream.of(1, 3, 5).map(String::valueOf).collect(Collectors.joining(",")));
+System.out.println(Stream.of(1, 3, 5).map(String::valueOf).collect(Collectors.joining(",", "(", ")")));
+```
+
+```
+abc
+135
+1,3,5
+(1,3,5)
+```
+
 ## 5 串行/并行
 
 ```java
