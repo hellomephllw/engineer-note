@@ -347,6 +347,34 @@ System.out.println(sortObjects.stream()
 ]
 ```
 
+##### 5) null处理
+
+```java
+List<SortObject> sortObjects = Arrays.asList(
+                    new SortObject(1, "张三", 18),
+                    new SortObject(2, "李四", 16),
+                    new SortObject(3, "王五", 20),
+                    new SortObject(5, "周六", 16),
+                    new SortObject(4, "郑七", 16),
+                    new SortObject(null, "", 15));
+// Comparator.nullsFirst把null排到前面
+// Comparator.nullsLast把null排到后面
+System.out.println(sortObjects.stream()
+        .sorted(Comparator.comparing(SortObject::getId, Comparator.nullsFirst(Integer::compareTo)))
+        .collect(Collectors.toList()));
+```
+
+```
+[
+    SortObject{id=null, name='', age=15},
+    SortObject{id=1, name='张三', age=18},
+    SortObject{id=2, name='李四', age=16},
+    SortObject{id=3, name='王五', age=20},
+    SortObject{id=4, name='郑七', age=16},
+    SortObject{id=5, name='周六', age=16}
+]
+```
+
 #### 3.2.3 limit
 
 ```java
