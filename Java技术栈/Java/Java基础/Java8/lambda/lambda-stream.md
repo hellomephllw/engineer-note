@@ -114,6 +114,7 @@ List<List<String>> list = new LinkedList<>();
 list.add(sub1);
 list.add(sub2);
 List<String> results = list.stream().flatMap(Collection::stream).collect(Collectors.toList());
+// List<String> results = list.stream().flatMap(sub -> sub.stream()).collect(Collectors.toList());
 System.out.println(results);
 ```
 
