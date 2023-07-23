@@ -8,7 +8,7 @@ Date对象有几个严重的问题：它不能转换时区，除了toGMTString()
 
 ### 1.2 Calendar
 
-无法转换时区。
+无法携带指定时区。
 
 ### 1.3 SimpleDateFormat
 
