@@ -14,7 +14,7 @@ awk其名称得自于它的创始人 Alfred Aho 、Peter Weinberger 和 Brian Ke
 
 一个awk脚本通常由：BEGIN语句块、能够使用模式匹配的通用语句块、END语句块3部分组成，这三个部分是可选的。任意一个部分都可以不出现在脚本中，脚本通常是被单引号中。
 
-```
+```shell
 awk 'BEGIN { commands } pattern { commands } END { commands }'
 ```
 
