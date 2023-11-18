@@ -637,6 +637,12 @@ System.out.println(map);
 Map<String, Map<Integer, List<Student>>> deepMap = students.stream().collect(
         Collectors.groupingBy(Student::getName, Collectors.groupingBy(Student::getId)));
 System.out.println(deepMap);
+// 统计数量
+Map<String, Long> countMap = students.stream().collect(Collectors.groupingBy(Student::getName, Collectors.counting()));
+            System.out.println(countMap);
+List<Integer> list = Arrays.asList(3, 1, 4, 3, 1, 1, 5);
+            Map<Integer, Long> listCountMap = list.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+            System.out.println(listCountMap);
 ```
 
 ```
@@ -651,6 +657,12 @@ System.out.println(deepMap);
     张三={1=[Student(id=1, name=张三)]}, 
     王五={3=[Student(id=3, name=王五)], 4=[Student(id=4, name=王五)]}, 
     郑六={4=[Student(id=4, name=郑六)]}
+}
+{
+    李四=1, 张三=1, 王五=2, 郑六=1
+}
+{
+    1=3, 3=2, 4=1, 5=1
 }
 ```
 
