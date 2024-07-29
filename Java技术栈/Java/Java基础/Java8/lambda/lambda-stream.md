@@ -639,10 +639,10 @@ Map<String, Map<Integer, List<Student>>> deepMap = students.stream().collect(
 System.out.println(deepMap);
 // 统计数量
 Map<String, Long> countMap = students.stream().collect(Collectors.groupingBy(Student::getName, Collectors.counting()));
-            System.out.println(countMap);
+System.out.println(countMap);
 List<Integer> list = Arrays.asList(3, 1, 4, 3, 1, 1, 5);
-            Map<Integer, Long> listCountMap = list.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-            System.out.println(listCountMap);
+Map<Integer, Long> listCountMap = list.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+System.out.println(listCountMap);
 ```
 
 ```
