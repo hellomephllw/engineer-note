@@ -220,6 +220,12 @@ List<DistinctObject> newList = list.stream().collect(
                         () -> new TreeSet<>(Comparator.comparing(DistinctObject::getId))), ArrayList::new)
 );
 System.out.println(newList);
+newList = list.stream().collect(
+        Collectors.collectingAndThen(
+                Collectors.toCollection(
+                        () -> new TreeSet<>(Comparator.comparing(DistinctObject::getId).thenComparing(DistinctObject::getName))), ArrayList::new)
+);
+System.out.println(newList);
 ```
 
 ```
