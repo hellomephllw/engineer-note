@@ -26,7 +26,7 @@
         - Term Dictionary（词典）：词典是词条的集合，顾名思义，词典中维护的是Term。词典一般是由文本集合中出现过的所有词条所组成的集合，磁盘上的每个block都利用公共前缀来压缩空间。
         - Term Index（词条索引）：由于词典中维护着文本中所有的词条，为了在其中更快的找到某个词条，我们为词条建立索引，可以通过词条索引中的词条前缀找到（索引只存了前缀）词条在词典的大致位置，再通过二分法在词典进行搜索。通过压缩算法FST（Finite State Transducers），词条索引的大小只有所有词条的几十分之一，因此词条索引可以存储在内存中，以提供更快的查找速度。
         - Posting List（倒排表）：倒排表记录的是词条出现在哪些文档里，以及出现的位置、词频率（在文档中出现的次数）等信息，使用跳表来计算交并集（and、or）、范围查询和短语查询（快速定位文档位置）。倒排表中的每条记录称为一个倒排项（posting）。
-<div style="width: 50%; margin: 0 auto"><img src="./assets/202207241555749.png" alt="7027703-b2c08f00cc8300e4" style="zoom:80%;" align="center"/></div>
+<div style="width: 100%; margin: 0 auto"><img src="./assets/202207241555749.png" alt="7027703-b2c08f00cc8300e4" style="zoom:80%;" align="center"/></div>
 <br/>
 
 ## 3 分页
