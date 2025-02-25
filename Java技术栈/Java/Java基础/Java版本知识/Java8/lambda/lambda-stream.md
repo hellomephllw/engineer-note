@@ -506,6 +506,19 @@ System.out.println(list.stream().filter(item -> item > 2).count());
 2
 ```
 
+#### 3.3.8 statistics
+
+```java
+List<Integer> list = Arrays.asList(2, 1, 3, 4);
+System.out.println(list.stream().mapToInt(item -> item).sum());
+System.out.println(list.stream().mapToInt(item -> item).average().orElse(0));
+```
+
+```
+10
+2.5
+```
+
 ### 3.4 短路
 
 #### 3.4.1 match
@@ -623,7 +636,20 @@ System.out.println(duplicatedStudentListMap);
 {1=[Student(id=1, name=张三), Student(id=1, name=王五)], 2=[Student(id=2, name=李四)]}
 ```
 
-### 4.3 groupingBy
+### 4.3 collectingAndThen
+
+```java
+List<String> list = Arrays.asList("b", "a", "c");
+// 两次操作
+String result = list.stream().collect(Collectors.collectingAndThen(Collectors.joining(","), s -> s + "!"));
+System.out.println(result);
+```
+
+```
+b,a,c!
+```
+
+### 4.4 groupingBy
 
 ```java
 List<Student> students = Arrays.asList(
@@ -643,6 +669,16 @@ System.out.println(countMap);
 List<Integer> list = Arrays.asList(3, 1, 4, 3, 1, 1, 5);
 Map<Integer, Long> listCountMap = list.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 System.out.println(listCountMap);
+// 先分组后再排序
+Map<Integer, List<Student>> groupedStudentsMap = students.stream()
+        .collect(Collectors.groupingBy(
+                Student::getId,
+                Collectors.collectingAndThen(
+                        Collectors.toList(),
+                        list -> list.stream()
+                                .sorted(Comparator.comparing(Student::getName))
+                                .collect(Collectors.toList()))));
+System.out.println(groupedStudentsMap);
 ```
 
 ```
@@ -664,9 +700,15 @@ System.out.println(listCountMap);
 {
     1=3, 3=2, 4=1, 5=1
 }
+{
+    1=[Student{id=1, name='张三'}],
+    2=[Student{id=2, name='李四'}],
+    3=[Student{id=3, name='王五'}],
+    4=[Student{id=4, name='王五'}, Student{id=4, name='郑六'}]
+}
 ```
 
-### 4.4 partitioningBy
+### 4.5 partitioningBy
 
 ```java
 List<Student> students = Arrays.asList(new Student(1, "张三"), new Student(2, "李四"), new Student(3, "王五"));
@@ -678,7 +720,7 @@ System.out.println(map);
 {false=[Student(id=1, name=张三)], true=[Student(id=2, name=李四), Student(id=3, name=王五)]}
 ```
 
-### 4.5 join
+### 4.6 join
 
 ```java
 System.out.println(Stream.of("a", "b", "c").collect(Collectors.joining()));
