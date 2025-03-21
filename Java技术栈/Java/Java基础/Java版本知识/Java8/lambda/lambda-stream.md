@@ -376,6 +376,32 @@ System.out.println(sortObjects.stream()
 ]
 ```
 
+##### 6) 忽略大小写
+
+```java
+List<SortObject> sortObjects = Arrays.asList(
+                new SortObject(1, "jack", 18),
+                new SortObject(2, "Jackson", 16),
+                new SortObject(3, "Amos", 20),
+                new SortObject(5, "alice", 16),
+                new SortObject(4, "张三", 25),
+                new SortObject(6, "李四", 30));
+        System.out.println(sortObjects.stream()
+                .sorted(Comparator.comparing(SortObject::getName, String.CASE_INSENSITIVE_ORDER))
+                .collect(Collectors.toList()));
+```
+
+```
+[
+    SortObject(id=5, name=alice, age=16),
+    SortObject(id=3, name=Amos, age=20),
+    SortObject(id=1, name=jack, age=18),
+    SortObject(id=2, name=Jackson, age=16),
+    SortObject(id=4, name=张三, age=25),
+    SortObject(id=6, name=李四, age=30)
+]
+```
+
 #### 3.2.3 limit
 
 ```java
